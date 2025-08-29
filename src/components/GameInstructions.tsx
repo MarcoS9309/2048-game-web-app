@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from '@phosphor-icons/react';
+import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 export function GameInstructions() {
@@ -8,13 +8,13 @@ export function GameInstructions() {
   return (
     <Card className="mt-6">
       <CardContent className="p-4">
-        <h3 className="font-semibold mb-3">How to Play</h3>
+        <h3 className="font-semibold mb-3">Cómo Jugar</h3>
         <div className="text-sm text-muted-foreground space-y-2">
           <p>
             {isMobile ? (
-              <>Use <strong>swipe gestures</strong> to move the tiles:</>
+              <>Usa <strong>gestos de deslizar</strong> para mover las fichas:</>
             ) : (
-              <>Use your <strong>arrow keys</strong> to move the tiles:</>
+              <>Usa las <strong>teclas de flecha</strong> para mover las fichas:</>
             )}
           </p>
           <div className="flex items-center justify-center gap-2 my-3">
@@ -26,9 +26,9 @@ export function GameInstructions() {
             </div>
           </div>
           <ul className="space-y-1 ml-4">
-            <li>• When two tiles with the same number touch, they merge into one!</li>
-            <li>• Try to create a tile with the number <strong>2048</strong> to win</li>
-            <li>• Keep playing for a higher score after winning</li>
+            <li>• Cuando dos fichas con el mismo número se tocan, ¡se combinan en una!</li>
+            <li>• Trata de crear una ficha con el número <strong>2048</strong> para ganar</li>
+            <li>• Sigue jugando para obtener una puntuación más alta después de ganar</li>
           </ul>
         </div>
       </CardContent>

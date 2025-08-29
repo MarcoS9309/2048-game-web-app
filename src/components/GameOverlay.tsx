@@ -15,17 +15,17 @@ export function GameOverlay({ type, onRestart, onContinue }: GameOverlayProps) {
           {type === 'win' ? (
             <>
               <div className="text-4xl mb-4">🎉</div>
-              <h2 className="text-2xl font-bold text-accent mb-2">You Win!</h2>
+              <h2 className="text-2xl font-bold text-accent mb-2">¡Ganaste!</h2>
               <p className="text-muted-foreground mb-6">
-                Congratulations! You reached 2048!
+                ¡Felicitaciones! ¡Alcanzaste 2048!
               </p>
               <div className="flex gap-3 justify-center">
                 <Button onClick={onRestart} variant="outline">
-                  Try Again
+                  Intentar de Nuevo
                 </Button>
                 {onContinue && (
                   <Button onClick={onContinue} className="bg-accent hover:bg-accent/90">
-                    Keep Playing
+                    Seguir Jugando
                   </Button>
                 )}
               </div>
@@ -33,12 +33,12 @@ export function GameOverlay({ type, onRestart, onContinue }: GameOverlayProps) {
           ) : (
             <>
               <div className="text-4xl mb-4">😞</div>
-              <h2 className="text-2xl font-bold text-destructive mb-2">Game Over</h2>
+              <h2 className="text-2xl font-bold text-destructive mb-2">Fin del Juego</h2>
               <p className="text-muted-foreground mb-6">
-                No more moves available!
+                ¡No hay más movimientos disponibles!
               </p>
               <Button onClick={onRestart} className="bg-primary hover:bg-primary/90">
-                Try Again
+                Intentar de Nuevo
               </Button>
             </>
           )}

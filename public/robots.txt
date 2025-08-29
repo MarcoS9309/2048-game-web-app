@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://MarcoS9309.github.io/2048-game-web-app/sitemap.xml

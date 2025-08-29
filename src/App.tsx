@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useKV } from '@github/spark/hooks';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useTouchGestures } from '@/hooks/useTouchGestures';
 import { Game2048, Direction } from '@/lib/game2048';
 import { GameHeader } from '@/components/GameHeader';
@@ -9,9 +9,9 @@ import { GameInstructions } from '@/components/GameInstructions';
 import { toast } from 'sonner';
 
 function App() {
-  const [game] = useState(() => new Game2048());
+  const [game, setGame] = useState(() => new Game2048());
   const [gameState, setGameState] = useState(game.getState());
-  const [bestScore, setBestScore] = useKV('game-2048-best-score', 0);
+  const [bestScore, setBestScore] = useLocalStorage('game-2048-best-score', 0);
 
   const updateGameState = useCallback(() => {
     const newState = game.getState();
@@ -33,15 +33,16 @@ function App() {
   }, [game, gameState.isGameOver, gameState.isWon, updateGameState]);
 
   const handleRestart = useCallback(() => {
-    game.restart();
-    updateGameState();
-    toast.success('New game started!');
-  }, [game, updateGameState]);
+    const newGame = new Game2048();
+    setGame(newGame);
+    setGameState(newGame.getState());
+    toast.success('¡Nuevo juego iniciado!');
+  }, []);
 
   const handleContinue = useCallback(() => {
     game.continueAfterWin();
     updateGameState();
-    toast.success('Keep playing to beat your high score!');
+    toast.success('¡Sigue jugando para superar tu mejor puntuación!');
   }, [game, updateGameState]);
 
   // Touch gesture support
@@ -73,9 +74,9 @@ function App() {
 
   useEffect(() => {
     if (gameState.isWon && !game.getState().isGameOver) {
-      toast.success('🎉 Congratulations! You reached 2048!');
+      toast.success('🎉 ¡Felicitaciones! ¡Alcanzaste 2048!');
     } else if (gameState.isGameOver) {
-      toast.error('😞 Game Over! No more moves available.');
+      toast.error('😞 ¡Fin del juego! No hay más movimientos disponibles.');
     }
   }, [gameState.isWon, gameState.isGameOver, game]);
 

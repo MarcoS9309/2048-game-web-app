@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { RotateCcw } from '@phosphor-icons/react';
+import { RotateCcw } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface GameHeaderProps {
@@ -23,25 +23,25 @@ export function GameHeader({ score, bestScore, onRestart }: GameHeaderProps) {
             className="flex items-center gap-2"
           >
             <RotateCcw size={16} />
-            Restart
+            Reiniciar
           </Button>
         </div>
         
         <p className="text-muted-foreground text-sm mb-4">
-          Join the tiles, get to <strong>2048!</strong>
+          ¡Une las fichas para llegar a <strong>2048!</strong>
         </p>
         
         <div className="flex gap-2">
           <div className="flex-1 text-center">
             <div className="bg-primary text-primary-foreground px-3 py-2 rounded-md">
-              <div className="text-xs font-medium uppercase tracking-wide">Score</div>
+              <div className="text-xs font-medium uppercase tracking-wide">Puntuación</div>
               <div className="text-lg font-bold">{score.toLocaleString()}</div>
             </div>
           </div>
           
           <div className="flex-1 text-center">
             <div className="bg-secondary text-secondary-foreground px-3 py-2 rounded-md">
-              <div className="text-xs font-medium uppercase tracking-wide">Best</div>
+              <div className="text-xs font-medium uppercase tracking-wide">Mejor</div>
               <div className="text-lg font-bold">{bestScore.toLocaleString()}</div>
             </div>
           </div>
@@ -55,21 +55,21 @@ export function GameHeader({ score, bestScore, onRestart }: GameHeaderProps) {
       <div>
         <h1 className="text-4xl font-bold text-foreground mb-2">2048</h1>
         <p className="text-muted-foreground text-sm">
-          Join the tiles, get to <strong>2048!</strong>
+          ¡Une las fichas para llegar a <strong>2048!</strong>
         </p>
       </div>
       
       <div className="flex items-center gap-4">
         <div className="text-center">
           <div className="bg-primary text-primary-foreground px-4 py-2 rounded-md">
-            <div className="text-xs font-medium uppercase tracking-wide">Score</div>
+            <div className="text-xs font-medium uppercase tracking-wide">Puntuación</div>
             <div className="text-lg font-bold">{score.toLocaleString()}</div>
           </div>
         </div>
         
         <div className="text-center">
           <div className="bg-secondary text-secondary-foreground px-4 py-2 rounded-md">
-            <div className="text-xs font-medium uppercase tracking-wide">Best</div>
+            <div className="text-xs font-medium uppercase tracking-wide">Mejor</div>
             <div className="text-lg font-bold">{bestScore.toLocaleString()}</div>
           </div>
         </div>
@@ -81,7 +81,7 @@ export function GameHeader({ score, bestScore, onRestart }: GameHeaderProps) {
           className="flex items-center gap-2"
         >
           <RotateCcw size={16} />
-          Restart
+          Reiniciar
         </Button>
       </div>
     </div>
