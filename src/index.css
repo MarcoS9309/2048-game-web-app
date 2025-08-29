@@ -70,6 +70,14 @@
   transition: all 0.15s ease-in-out;
 }
 
+.game-area {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 .game-tile-2 { background: oklch(0.92 0.02 35); color: oklch(0.35 0.05 35); }
 .game-tile-4 { background: oklch(0.88 0.04 35); color: oklch(0.3 0.05 35); }
 .game-tile-8 { background: oklch(0.75 0.12 35); color: oklch(0.98 0 0); }

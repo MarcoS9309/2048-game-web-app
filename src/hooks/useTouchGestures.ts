@@ -10,12 +10,24 @@ export function useTouchGestures({ onMove }: TouchHandler) {
 
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
+      // Only handle touch events on the game area, not the entire document
+      const target = e.target as Element;
+      if (!target.closest('.game-area') && !target.closest('[data-game-grid]')) {
+        return;
+      }
+      
       const touch = e.touches[0];
       touchStartRef.current = { x: touch.clientX, y: touch.clientY };
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
       if (!touchStartRef.current) return;
+
+      // Only handle touch events on the game area
+      const target = e.target as Element;
+      if (!target.closest('.game-area') && !target.closest('[data-game-grid]')) {
+        return;
+      }
 
       const touch = e.changedTouches[0];
       const deltaX = touch.clientX - touchStartRef.current.x;
@@ -43,12 +55,13 @@ export function useTouchGestures({ onMove }: TouchHandler) {
       touchStartRef.current = null;
     };
 
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchend', handleTouchEnd, { passive: false });
+    // Use capture phase to ensure we get the events before other handlers
+    document.addEventListener('touchstart', handleTouchStart, { passive: true, capture: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: false, capture: true });
 
     return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('touchstart', handleTouchStart, true);
+      document.removeEventListener('touchend', handleTouchEnd, true);
     };
   }, [onMove]);
 }

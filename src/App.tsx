@@ -24,13 +24,15 @@ function App() {
   }, [game, bestScore, setBestScore]);
 
   const handleMove = useCallback((direction: Direction) => {
-    if (gameState.isGameOver || gameState.isWon) return;
+    // Use current game state instead of potentially stale gameState
+    const currentState = game.getState();
+    if (currentState.isGameOver || currentState.isWon) return;
     
     const moved = game.move(direction);
     if (moved) {
       updateGameState();
     }
-  }, [game, gameState.isGameOver, gameState.isWon, updateGameState]);
+  }, [game, updateGameState]);
 
   const handleRestart = useCallback(() => {
     const newGame = new Game2048();
@@ -50,19 +52,22 @@ function App() {
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      event.preventDefault();
-      
+      // Only handle arrow keys and prevent their default behavior
       switch (event.key) {
         case 'ArrowUp':
+          event.preventDefault();
           handleMove('up');
           break;
         case 'ArrowDown':
+          event.preventDefault();
           handleMove('down');
           break;
         case 'ArrowLeft':
+          event.preventDefault();
           handleMove('left');
           break;
         case 'ArrowRight':
+          event.preventDefault();
           handleMove('right');
           break;
       }
@@ -89,7 +94,7 @@ function App() {
           onRestart={handleRestart}
         />
         
-        <div className="relative">
+        <div className="relative" role="main" aria-label="Área de juego 2048">
           <GameGrid gameState={gameState} />
           
           {gameState.isWon && !gameState.isGameOver && (
@@ -109,6 +114,13 @@ function App() {
         </div>
         
         <GameInstructions />
+        
+        {/* Screen reader instructions */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
+          Puntuación actual: {gameState.score}. 
+          {gameState.isWon && "¡Has ganado alcanzando 2048!"} 
+          {gameState.isGameOver && "Juego terminado. No hay más movimientos disponibles."}
+        </div>
       </div>
     </div>
   );
